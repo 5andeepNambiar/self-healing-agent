@@ -1,0 +1,22 @@
+# Environment variables & secrets (CRITICAL: Never commit to GitHub)
+.env
+*.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Pytest & Testing caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# macOS files
+.DS_Store
