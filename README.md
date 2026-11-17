@@ -10,18 +10,18 @@ When test suites fail, the agent intercepts the test execution stack, dynamicall
 
 ```mermaid
 flowchart TD
-    Start([Run Agent]) --> RunTests[1. Test Execution Node\nRun pytest across repository]
-    RunTests --> CheckPass{Tests Pass?}
+    Start(["Run Agent"]) --> RunTests["1. Test Execution Node<br/>Run pytest across repository"]
+    RunTests --> CheckPass{"Tests Pass?"}
     
-    CheckPass -- Yes --> GitCommit[3. Git Commit Node\nStage diff & commit: 'fix(agent): ...']
-    GitCommit --> End([🎉 Done: Green Build])
+    CheckPass -- Yes --> GitCommit["3. Git Commit Node<br/>Stage diff and commit: fix(agent): ..."]
+    GitCommit --> End(["Done: Green Build"])
     
-    CheckPass -- No --> CheckRetries{Attempts < 3?}
-    CheckRetries -- No --> FailEnd([⚠️ Max Retries Reached])
+    CheckPass -- No --> CheckRetries{"Attempts < 3?"}
+    CheckRetries -- No --> FailEnd(["Max Retries Reached"])
     
-    CheckRetries -- Yes --> TracebackParser[Extract files & AST context from traceback]
-    TracebackParser --> LLMNode[2. Surgical Patch Node (Gemini)\nGenerate exact search & replace diff]
-    LLMNode --> ApplyPatch[Apply patch to target file]
+    CheckRetries -- Yes --> TracebackParser["Extract files and context from traceback"]
+    TracebackParser --> LLMNode["2. Surgical Patch Node (Gemini)<br/>Generate exact search and replace diff"]
+    LLMNode --> ApplyPatch["Apply patch to target file"]
     ApplyPatch --> RunTests
 ```
 
